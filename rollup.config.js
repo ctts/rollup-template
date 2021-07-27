@@ -3,7 +3,9 @@ import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import eslint from '@rollup/plugin-eslint';
+import filesize from 'rollup-plugin-filesize';
 import { terser } from 'rollup-plugin-terser';
+
 const isProd = process.env.NODE_ENV === 'production';
 
 // 通用的插件
@@ -27,6 +29,7 @@ const basePlugins = [
     exclude: 'node_modules/**',
     // babel 默认不支持 ts 需要手动添加
   }),
+  filesize()
 ];
 // 开发环境需要使用的插件n
 const devPlugins = [];

@@ -15,7 +15,7 @@ module.exports = {
     es6: true,
   },
   parserOptions: {
-    project: './tsconfig.json',
+    // project: './tsconfig.json',
     ecmaVersion: 2019,
     sourceType: 'module',
     ecmaFeatures: {
