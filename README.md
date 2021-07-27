@@ -1,5 +1,7 @@
 # rollup-template
 
+rollup+eslint+typescript+babel+jest
+
 ## rollup开发模板
 
 1. 在 src 目录下进行开发
