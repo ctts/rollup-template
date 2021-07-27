@@ -2,20 +2,31 @@ import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import typescript from '@rollup/plugin-typescript';
+import eslint from '@rollup/plugin-eslint';
 import { terser } from 'rollup-plugin-terser';
-
 const isProd = process.env.NODE_ENV === 'production';
 
 // 通用的插件
 const basePlugins = [
-  typescript(),
+  eslint({
+    throwOnError: true, // lint 结果有错误将会抛出异常
+    throwOnWarning: true,
+    include: ['src/**/*.ts'],
+    exclude: ['node_modules/**', 'dist/**'],
+  }),
+  commonjs(),
   resolve({
     jsnext: true,
     main: true,
     browser: true
   }),
-  commonjs(),
-  babel()
+  typescript(),
+  babel({
+    runtimeHelpers: true,
+    // 只转换源代码，不运行外部依赖
+    exclude: 'node_modules/**',
+    // babel 默认不支持 ts 需要手动添加
+  }),
 ];
 // 开发环境需要使用的插件n
 const devPlugins = [];
